@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+
+    <link rel="stylesheet" href="/ext/font-awesome-5.15.3/css/all.min.css" />
+
+</head>
+
+<body data-version="2022-08-09-2300" style="background-color: #EFEFEF;">
+    <input type="hidden" name="client-url" value="https://homolog1gca.galera.app">
+    <input type="hidden" name="user-id" value="221">
+    <input type="hidden" name="user-token" value="f477b196-7796-444c-9af2-a3c3ea3dcba4">
+    <script>
+        const clientUrl = document.querySelector('[name="client-url"]').value;
+        const userId = document.querySelector('[name="user-id"]').value;
+        const userToken = document.querySelector('[name="user-token"]').value;
+        const themeColor = '#533EEC';
+        const viewHeaderTextColor = '#FFFFFF';
+
+        webgca = {
+            clientUrl,
+            userId,
+            userToken,
+            themeColor,
+            viewHeaderTextColor,
+        };
+    </script>
+
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col">
+                <div id="app"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- built files will be auto injected -->
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+.custom-control-label {
+    padding: 0;
+}
+
+.card-infos-view-edit {
+    line-height: 125%;
+}
+
+.card-infos-view-edit hr {
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.card-infos-view-edit [class|="col"] {
+    padding-top: 0.35em;
+}
+
+.container-view-buttons a {
+    color: #000;
+}
+
+.container-view-buttons a:hover {
+    color: #000;
+    text-decoration: underline;
+}
