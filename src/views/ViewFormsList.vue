@@ -130,9 +130,6 @@
 </template>
 
 <script>
-import WebGcaSpaFormularios from "@/webgca-spa-rh-formularios";
-const webGcaSpaFormularios = WebGcaSpaFormularios;
-
 import MixinViewDefault from "@/mixins/MixinViewDefault.js";
 
 import ComponentBlockAlert from "@/components/ComponentBlockAlert";
@@ -315,162 +312,11 @@ export default {
       if (this.selectedFiltro != null) {
         this.values.push(this.selectedFiltro);
       }
-
-      console.log("VALUES:", this.values);
-    },
-
-    // capturarDados() {
-    //   let url = "http://localhost:3000/formulario";
-
-    //   this.axios.get(url).then((res) => {
-    //     console.log("RESPOSTA:", res.data);
-    //     this.mostraTabela = true;
-    //     this.items = res.data;
-    //   });
-    // },
-
-    copyForm({ data, copyParticipants }) {
-      const slug = data.slug;
-      const userId = webgca.userId;
-
-      let url = `/formulario/${slug}/copy/?us=${userId}`;
-
-      if (copyParticipants) {
-        url += `&cp=1`;
-      }
-
-      this.modalConfirmCopyParticipants.requesting = true;
-
-      this.axios
-        .get(url)
-        .then((response) => {
-          this.loadFormsList();
-        })
-        .catch((error) => {
-          this.blockAlertView.show = true;
-          this.blockAlertView.content = "Erro ao copiar formulário";
-          this.blockAlertView.type = "danger";
-        })
-        .finally(() => {
-          this.modalConfirmCopyParticipants.requesting = false;
-          this.modalConfirmCopyParticipants.show = false;
-        });
-    },
-
-    rowHasCollects(row) {
-      return Object.keys(row.coleta).length > 0;
-    },
-
-    loadFormsList() {
-      this.requesting.tableFormsData = true;
-
-      this.axios
-        .get("/formularios/")
-        .then((response) => {
-          const data = response.data;
-
-          this.tableForms.data = data;
-        })
-        .finally(() => {
-          this.requesting.tableFormsData = false;
-        });
-    },
-
-    loadFormBySlug(slug) {
-      return this.axios.get(`/formulario/${slug}/`);
-    },
-
-    //Events
-
-    modalConfirmCopyParticipantsClose() {
-      this.modalConfirmCopyParticipants.data = null;
-      this.modalConfirmCopyParticipants.show = false;
-    },
-
-    modalConfirmCopyParticipantsYes(data) {
-      this.copyForm({
-        copyParticipants: true,
-        data,
-      });
-    },
-
-    modalConfirmCopyParticipantsNo(data) {
-      this.copyForm({
-        copyParticipants: false,
-        data,
-      });
-    },
-
-    modalDeleteConfirmYes(data) {
-      const row = data;
-      const slug = row.slug;
-
-      this.axios
-        .delete(`/formularios/${slug}/`)
-        .then((response) => {
-          this.blockAlertView.show = true;
-          this.blockAlertView.content = "Formulário excluído com sucesso";
-          this.blockAlertView.type = "success";
-
-          this.loadFormsList();
-        })
-        .finally(() => {});
-
-      this.modalDeleteConfirm.show = false;
-    },
-
-    modalDeleteConfirmNo(data) {
-      this.modalDeleteConfirm.show = false;
-    },
-
-    componentModalFormEntireViewClose(e) {
-      this.modalFormEntireView.selectedForm = null;
-
-      this.modalFormEntireView.show = false;
-    },
-
-    componentModalFormEntireViewCloseX(e) {
-      this.componentModalFormEntireViewClose(e);
-    },
-
-    tableFormsButtonEditClick(e, row) {
-      const slug = row.slug;
-
-      this.$router.push(`/formularios/${slug}/editar`);
-    },
-
-    async tableFormsButtonViewClick(e, row) {
-      this.modalFormEntireView.requesting = true;
-      this.modalFormEntireView.show = true;
-
-      const form = await this.loadFormBySlug(row.slug);
-
-      this.modalFormEntireView.selectedForm = form.data;
-
-      console.log("INFORMAÇÕES DAS QUESTÕES:", form.data);
-
-      this.modalFormEntireView.requesting = false;
-    },
-
-    tableFormsButtonDeleteClick(e, row) {
-      this.modalDeleteConfirm.data = row;
-      this.modalDeleteConfirm.show = true;
-    },
-
-    tableFormsButtonDropdownCreateCollectClick(e, row) {
-      window.location.href = this.getCreateCollectUrl(row);
-    },
-
-    tableFormsButtonDropdownCopyFormClick(e, row) {
-      this.modalConfirmCopyParticipants.data = row;
-      this.modalConfirmCopyParticipants.show = true;
     },
   }, //methods
   watch: {}, //watch
   created() {}, //created
-  beforeMount() {
-    this.loadFormsList();
-  }, //beforeMount
+  beforeMount() {}, //beforeMount
   mounted() {}, //mounted
   destroyed() {}, //destroyed
   beforeRouteEnter(to, from, next) {

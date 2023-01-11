@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import Axios from './axios'
+// import Axios from './axios'
 
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -21,17 +21,5 @@ Vue.config.productionTip = false;
 new Vue({
     router,
     store,
-    data: {
-        axiosClassInstance: null,
-    },
-    created: function() {
-
-        const axiosClassInstance = new Axios();
-
-        this.axiosClassInstance = axiosClassInstance;
-
-        Vue.prototype.axios = axiosClassInstance.getAxiosInstance();
-
-    },
     render: h => h(App)
 }).$mount('#app');
